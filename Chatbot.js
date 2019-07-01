@@ -68,19 +68,24 @@ function greetingBot(str) {
     return console.log("Bot: Kinda happy to hear that");
   } else if (negGreetingWords.includes(splitWords)) {
     return console.log("Bot: Meh. Stop complaining");
+  } else {
+    return console.log("Bot: I wish I cared");
   }
 }
 
 function repeatQuestions() {
   reader.question(``, answer => {
-    console.log("why " + answerFilter(answer) + " ?");
-    repeatQuestions();
+    if (answer === "bye") {
+      console.log("you giving up already? Bye then");
+    } else {
+      console.log("Bot: why " + answerFilter(answer) + " ?");
+      repeatQuestions();
+    }
   });
 }
 
 reader.question(`Bot: My name is Annoybot, How are you today? \n`, res => {
   greetingBot(res);
-
   reader.question(
     `Bot: Anyway! So what do you want to talk about today?\n`,
     answer => {
